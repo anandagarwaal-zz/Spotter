@@ -13,15 +13,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 
 
-class Details : AppCompatActivity(), Callback<KoinexResponse> {
-    override fun onResponse(call: Call<KoinexResponse>?, response: Response<KoinexResponse>?) {
-        Toast.makeText(this,"success",Toast.LENGTH_LONG)
+class Details : AppCompatActivity(), Callback<List<KoinexResponse>> {
+    override fun onResponse(call: Call<List<KoinexResponse>>?, response: Response<List<KoinexResponse>>?) {
+        Toast.makeText(this, "success", Toast.LENGTH_LONG)
         var txt1 = findViewById<TextView>(R.id.txt1)
-//        Toast.makeText(this, response?.body().toString(), Toast.LENGTH_LONG)
-        txt1.text = response!!.code().toString()
+        txt1.text = response?.body().toString()
     }
 
-    override fun onFailure(call: Call<KoinexResponse>?, t: Throwable?) {
+    override fun onFailure(call: Call<List<KoinexResponse>>?, t: Throwable?) {
         Toast.makeText(this, "failure", Toast.LENGTH_LONG)
     }
 
@@ -30,8 +29,8 @@ class Details : AppCompatActivity(), Callback<KoinexResponse> {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
         val retrofit = Retrofit.Builder()
-                .baseUrl("https://koinex.in/api/")
-                
+                .baseUrl("https://api.binance.com/api/v1/ticker/")
+
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build()
 
